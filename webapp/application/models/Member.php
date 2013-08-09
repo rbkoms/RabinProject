@@ -7,7 +7,6 @@ class SexInvalidException extends Exception{ }
 
 class Member extends ActiveRecord\Model {
 	static $table_name ='members';
-	//static $primary_key = 'id';
 
 	static $has_one = array(
 		array(
