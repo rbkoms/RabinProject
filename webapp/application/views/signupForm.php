@@ -32,6 +32,7 @@ foreach($organizations as $organization)
 	<?php }?>
 
 </select><br>
+
 <input type="submit" value="submit">
 </form>
 

@@ -26,6 +26,14 @@ class Dashboard extends CI_Controller {
 		return $this->load->view('userf', array("member"=>$this->member));
 
 	}
+    public function add_course(){
+
+        $course=Course::all();
+        return $this->load->view('add_course',
+            array(
+            'member'=>$this->member,
+            'courses'=>$course));
+    }
 
 	}
 

@@ -1,23 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	
-<title>login</title>
 
-	
-</head>
-<body>
-
-<?php 
-	if($this->session->flashdata('error')){
-	echo $this->session->flashdata('error');
-	}
-	if($this->session->flashdata('in')){
-	echo $this->session->flashdata('in');
-	}
-?>
 <pre><?php
-
 echo "Firstname:\n";
 echo $member->first_name;
 echo "\n";
@@ -34,7 +19,18 @@ echo "Organization:\n";
 echo $member->organization->org_name;
 
 ?></pre>
-<a href='/userlogin/logout'>logout</a><br>
+<form method ='post'>
+<?php
+foreach($courses as $course)
+	{?>
+	<input type="checkbox" name ="check_list[]" value="<?php echo $course->id; ?>"><?php echo $course->cname; ?><br>
+	
+	<?php }?>
+
+<input type="submit" value="submit">
+</form>
+<a href='/userlogin/logout'><h2>logout..</h2></a>
+<!-- <a href='/userlogin/logout'>logout</a>
 <a href='/dashboard/add_course'>add_course</a>
-</body>
+ --></body>
 </html>
