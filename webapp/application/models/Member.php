@@ -1,11 +1,5 @@
 <?php
-class FirstNameInvalidException extends Exception{ }
-class LastNameInvalidException extends Exception{ }
-class EmailInvalidException extends Exception{ }
-class SexInvalidException extends Exception{ }
-
-
-class Member extends ActiveRecord\Model {
+class Member extends BaseModel {
 	
 	static $has_one = array(
 		array(
@@ -54,7 +48,7 @@ class Member extends ActiveRecord\Model {
 		
 			if($email=='') {
 				
-				throw new EmailNameInvalidException("email required");
+				throw new EmailInvalidException("email required");
 			}	
 		
 		$this->assign_attribute('email', $email);
@@ -64,7 +58,7 @@ class Member extends ActiveRecord\Model {
 		
 			if($sex=='') {
 				
-				throw new SexNameInvalidException("sex required");
+				throw new SexInvalidException("sex required");
 			}	
 
  		$this->assign_attribute('sex', $sex);	
@@ -72,8 +66,20 @@ class Member extends ActiveRecord\Model {
 
 	public function set_organization($organization) { 
 
-		$this->assign_attribute('org_id', $organization->id);	
+		if(!$organization instanceof Organization) {
+
+		throw new InvalidOrganizationException("invalid org name");
+	
 	}
+	
+		$organization->check_is_valid();
+		
+
+		$this->assign_attribute('org_id', $organization->id);	
+	
+	}
+
+	
 
 	public function get_first_name() {
 
@@ -100,30 +106,6 @@ class Member extends ActiveRecord\Model {
 		return $this->read_attribute('sex');
 	}
 
-	public function activate() {
-
-		$this->is_active = 1;
-		$this->save();
-
-	}
-
-	public function deactivate() {
-
-		$this->is_active = 0;
-		$this->save();	
-	}
-
-	public function delete() {
-
-		$this->is_deleted = 1;
-		$this->save();	
-	}
-
-	public function undelete() {
-
-		$this->is_deleted = 0;
-		$this->save();
-	}
 
 	public static function create($parameters) {
 
@@ -133,19 +115,20 @@ class Member extends ActiveRecord\Model {
 		$member->last_name= $parameters['last_name'];
 		$member->email = $parameters['email'];
 		$member->sex = $parameters['sex'];
-		$member->organization =$parameters['organization'];
-		//$member->save();
-		
-		$user = User::create(array(
-			'username' => $parameters['username'],
-			'password' => $parameters['password'],
-			'member'=> $member,
-		));
+		$member->organization = $parameters['organization'];
+		$member->is_active= TRUE;
+        $member->is_delete= FALSE;
+						
 
 		$member->save();
-		$user->member=$member;
-		$user->save();
+		/*$user->member=$member;*/
+		/*$user->save();*/
 
 		return $member;	
 	}
+
+
+
+	
+
 }

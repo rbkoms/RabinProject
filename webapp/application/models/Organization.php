@@ -1,17 +1,28 @@
 <?php
-class OrgNameInvalidException extends Exception{ }
-class OrgLocationException extends Exception{ }
-class OrgDirectorInvalidException extends Exception{ }
-class OrgContactnoInvalidException extends Exception{ }
-
-class Organization extends ActiveRecord\Model {
+include_once('Exceptions.php');
+class Organization extends BaseModel {
 	
 	static $has_many = array(
 		array(
         'members',
         'class_name'=>'Member',
         'foreign_key'=>'org_id',
+        ),
+        array(
+        'organization_enrollments',
+        'class_name'=>'OrganizationEnrollment',
+        'foreign_key'=>'organization_id',
         ));
+
+	 /*static $belongs_to = array(
+        array(
+            'course',
+            'class_name'=>'Course',
+            'foreign_key'=>'id',
+
+            ));*/
+
+    
 	static $table_name = 'organizations';
 	static $primary_key = 'id';
 
@@ -59,52 +70,7 @@ class Organization extends ActiveRecord\Model {
 		$organizations = Organization::find('all');
 		return $organizations;
 	}
-	/*public function get_org_name() {
-
-		return $this->read_attribute('org_name');
-	}
-
-	public function get_org_location() {
-
-		return $this->read_attribute('org_location');
-		
-	}
-
-	public function get_org_director() {
-
-		return $this->read_attribute('org_director');
-	}
-
-	public function get_org_contact_no() {
-
-		return $this->read_attribute('org_contact_no');
-	}
-
-	public function activate() {
-
-		$this->is_active = 1;
-		$this->save();
-
-	}
-
-	public function deactivate() {
-
-		$this->is_active = 0;
-		$this->save();	
-	}
-
-	public function delete() {
-
-		$this->is_deleted = 1;
-		$this->save();	
-	}
-
-	public function undelete() {
-
-		$this->is_deleted = 0;
-		$this->save();
-	}*/
-
+	
 	public static function create($parameters) {
 
 		$organization = new Organization();
@@ -113,6 +79,8 @@ class Organization extends ActiveRecord\Model {
 		$organization->org_location = $parameters['org_location'];
 		$organization->org_director = $parameters['org_director'];
 		$organization->org_contact_no = $parameters['org_contact_no'];
+		$organization->is_active=TRUE;
+        $organization->is_delete=FALSE;
 		$organization->save();
 		
 

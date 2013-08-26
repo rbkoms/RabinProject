@@ -6,10 +6,10 @@ class Migration_Add_table_active_delete extends CI_Migration{
 
 	$params=array(
 		'is_active'=>array(
-			'type'=>'int',
+			'type'=>'boolean',
 			),
 		'is_delete'=>array(
-			'type'=>'int',
+			'type'=>'boolean',
 			),
 	);
 	$this->dbforge->add_column('members',$params);

@@ -14,3 +14,11 @@
 
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */
+$hook['post_controller_construtor'] = array(
+
+		'class' =>'IECacheClear',
+		'function' =>'setResponseHeaders',
+		'filename' =>'IECacheClear.php',
+		'filepath' => 'hooks',
+		'params'=>array()
+		);

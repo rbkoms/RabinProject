@@ -1,0 +1,15 @@
+1:
+	cname:'Nepal'
+	id:1
+	catagory:'General'
+	duration:'10:00mins'
+	created_at:'datetime'
+	update_at:'datatime'
+
+2:
+	cname:'IQ'
+	id:2
+	catagory:'General'
+	duration:'11:00mins'
+	created_at:'datetime'
+	update_at:'datatime'

@@ -1,0 +1,29 @@
+1:
+	first_name:'Kiran'
+	id:1
+	last_name:'Guragai'
+	email:'kiran@g.co'
+	sex:'Male'
+	is_active:1
+	is_delete:0
+	org_id:1
+
+2:
+	first_name:'Rabin'
+	id:2
+	last_name:'Karma'
+	email:'rb@g.co'
+	sex:'Male'
+	is_active:0
+	is_delete:0
+	org_id:2
+
+3:
+	first_name:'Om'
+	id:3
+	last_name:'dhoj'
+	email:'om@g.co'
+	sex:'Male'
+	is_active:1
+	is_delete:0
+	org_id:1

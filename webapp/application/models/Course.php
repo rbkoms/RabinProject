@@ -1,9 +1,5 @@
 <?php
-class CNameInvalidException extends Exception{ }
-class CatagoryInvalidException extends Exception{ }
-class DurationInvalidException extends Exception{ }
-
-
+include_once('Exceptions.php');
 class Course extends ActiveRecord\Model {
 	static $table_name ='courses';
 
@@ -13,17 +9,12 @@ class Course extends ActiveRecord\Model {
 		array(
         'enrollments',
         'class_name'=>'Enrollment',
-        'foreign_key'=>'course_id',
-        ),
-		 array(
-        'members',
-        'class_name'=>'Member',
-        'foreign_key'=>'member_id',
-    	'through'=>'enrollment',
-        ));
-	
-
-	
+        'foreign_key'=>'course_id'),
+		array(
+        'organization_enrollments',
+        'class_name'=>'OrganizationEnrollment',
+        'foreign_key'=>'course_id'),
+   		);
 
 	public function set_cname($cname) {
 		
@@ -74,15 +65,11 @@ class Course extends ActiveRecord\Model {
 
 
 	public static function create($parameters) {
-		//echo $parameters['cname'];
-		//exit();
 		$course = new Course();
 
 		$course->cname = $parameters['cname'];
 		$course->catagory= $parameters['catagory'];
 		$course->duration = $parameters['duration'];
-		//rint_r($course);
-		//exit();
 		$course->save();
 
 		return $course;

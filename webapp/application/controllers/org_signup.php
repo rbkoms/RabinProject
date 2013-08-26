@@ -15,20 +15,16 @@ class Org_signup extends CI_Controller {
 				}
     	
 		
-		$org_name = $this->input->post("org_name");
-		$org_location = $this->input->post("org_location");
-		$org_director = $this->input->post("org_director");
-		$org_contact_no = $this->input->post("org_contact_no");
+		$data['org_name']= $_POST['org_name'];
+		$data['org_location']= $_POST['org_location'];
+		$data['org_director']= $_POST['org_director'];
+		$data['org_contact_no']= $_POST['org_contact_no'];
+		
 
 		
-		try{
+		try {
 
-			$organization = Organization::create(array(
-				'org_name' => $org_name,
-				'org_location' => $org_location,
-				'org_director'  => $org_director,
-				'org_contact_no' =>$org_contact_no,
-				));
+			$organization = Organization::create($data);
 			}
 
 		catch(OrgNameInvalidException $e)
@@ -47,20 +43,22 @@ class Org_signup extends CI_Controller {
 		catch(OrgContactnoInvalidException $e)
 			{
 				return $this->load->view('orgForm', array('message'=>$e->getMessage()));
-			}			
+			}	
 
-
-		if(!$organization)
-		{
+		
+		if(!$organization) {
 			$this->session->set_flashdata('create_problem','org unseccess');
 			
 			redirect("org_signup");
 		}
 		$organizations = Organization::all();
+		$courses= Course::all();
 		
 		return $this->load->view('orgdetails',array(
 			
-			'organizations'=> $organizations));
+			'organizations'=> $organizations,
+			'courses'=>$courses,
+			'organization'=>$organization));
 	}
 
 	

@@ -1,43 +1,83 @@
 <?php
-
- class UserInvalidException extends Exception { }
- class UserPasswordInvalidException extends Exception { }
- class UserNameInvalidException extends Exception{ }
- class PasswordInvalidException extends Exception{ }
-
+ include_once('Exceptions.php');
  class User extends ActiveRecord\Model {
     
     static $belongs_to = array(
         array(
         'member',
         'class_name'=>'Member',
-        'foreign_key'=>'member_id',
+        'foreign_key'=>'id',
         ));
-
-
 
     static $table_name ='users';
     static $primary_key = 'id';
 
-	public function set_username($username) {
+	/*public function set_username($username) {
 
         if($username=='') {
             throw new UserNameInvalidException("username required");
-        }   
+        } 
+
+        if()
 
         if(User::exists(array(
-            'username' => $username,
-            )))
-        {
-            throw new UserNameInvalidException("username is there");
-        }
+                'username' => $username,
+                )))
+            {
+                throw new UserNameInvalidException("username is there");
+            }
 
            $this->assign_attribute('username', $username);
 	}
+*/
+    public function set_username($username)
+    {
 
+        if ($username=='')
+        {
+            throw new UserNameInvalidException("Username required");
+        }
+
+        if ($this->is_new_record())  {
+            
+            $bool = User::exists(array('conditions'=>array(
+
+            'username'=>$username,
+            
+            )));
+            
+         if ($bool) {
+            
+            throw new UserNameInvalidException("Username already exist");
+            
+        }
+        }
+        else
+        {
+            $bool = User::exists(array('conditions'=>array(
+
+            'username = ? and id != ?',
+            $username,
+            $this->id,
+            
+            )));
+            
+         if ($bool) {
+            
+            throw new UserNameInvalidException("Username already exist");
+            
+        }
+ 
+        }
+    
+        $this->assign_attribute('username', $username);
+        }
+
+   
 	public function set_password($password) {
 
         if($password=='') {
+
             throw new PasswordInvalidException("password required");
         }   
 
@@ -50,6 +90,7 @@
     }
 
 	public function get_username() {
+
 		  return $this->read_attribute('username');
 	} 
   
@@ -69,6 +110,7 @@
 
     
         if(!$user) {
+
             throw new UserInvalidException('Your UserName is invalid  :(');
         }
         
@@ -82,11 +124,11 @@
 
     public static function create($parameters) {
 
-    	$user = new user();
+    	$user = new User();
 
         $user->username = ($parameters['username']);
         $user->password = ($parameters['password']);
-        //$user->member = ($parameters['member']);
+        
         $user->save();
 	
 	   return $user;

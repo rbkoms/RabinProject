@@ -19,6 +19,8 @@ Organization Name: <input type="text" name="org_name"><br>
 Location: <input type="text" name="org_location"><br>
 Director: <input type="text" name="org_director"><br>
 Contact_No: <input type="text" name="org_contact_no"><br>
+	
+
 <input type="submit" value="submit">
 
 </form>

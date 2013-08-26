@@ -22,7 +22,7 @@ Sex: <input type="radio" name="sex" value="Male">Male
      <input type="radio" name="sex" value="Female">Female<br>
 Username: <input type="text" name="username"><br>
 Password: <input type="text" name="password"><br>
-Organization: <select name="organizations">
+Organization: <select name="organization_id">
 
 <?php
 foreach($organizations as $organization)

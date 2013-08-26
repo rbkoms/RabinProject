@@ -1,6 +1,6 @@
 <?php
 
-class Signup extends CI_Controller {
+class Signup extends NonSessionController {
 
 	public function __construct() {
 
@@ -9,78 +9,88 @@ class Signup extends CI_Controller {
 
 	public function index() {
 
-		if($this->session->userdata('member_id'))
-        {
-            redirect('dashboard');
-        }
-			
+		$this->check_session();
 		$organizations = Organization::finder();
 
 		if($_SERVER['REQUEST_METHOD'] !== 'POST') {
+			/*$str= Member::echo_table_name();
+			echo $str;*/
 
 			return $this->load->view('signupForm',array('organizations'=>$organizations));
 		}
 		
-		$first_name = $this->input->post("first_name");
-		$last_name = $this->input->post("last_name");
-		$username = $this->input->post("username");
-		$password = $this->input->post("password");
-		$email = $this->input->post("email");
-		$sex = $this->input->post("sex");
-		$organization = Organization::find_by_id($this->input->post("organizations"));
+		$data['first_name'] = $_POST['first_name'];
+		$data['last_name'] = $_POST['last_name'];
+		$data['username'] = $_POST['username'];
+		$data['password'] = $_POST['password'];
+		$data['email'] = $_POST['email'];
+		$data['sex'] = $_POST['sex'];
+		$organization = Organization::find_by_id($_POST['organization_id']);
+		$data['organization']= $organization;
 
-
-		
-		
 		try{
 
-			$member = Member::create(array(
-				'first_name' => $first_name,
-				'last_name' => $last_name,
-				'username'  => $username,
-				'password' =>$password,
-				'email'  => $email,
-				'sex'  => $sex,
-				'organization' => $organization,
-				));
-
-			$this->session->set_userdata(array(
-
-				'member_id'=>$member->id));
-
-
-			redirect('dashboard/index/');
+			$member = Member::create($data);
+			$user = User::create($data);
+				
 		}
 			
 		catch(FirstNameInvalidException $e)
 			{
-				return $this->load->view('signupForm', array('message'=>$e->getMessage(),'organizations'=>$organizations));
+				return $this->load_view('signupForm', array(
+					'message'=>$e->getMessage(),
+					'organizations'=>$organizations));
 			}
 		catch(LastNameInvalidException $e)
 			{
-				return $this->load->view('signupForm', array('message'=>$e->getMessage(),'organizations'=>$organizations));
+				return $this->load_view('signupForm', array(
+					'message'=>$e->getMessage(),
+					'organizations'=>$organizations));
 			
 			}
 		catch(EmailInvalidException $e)
 			{
-				return $this->load->view('signupForm', array('message'=>$e->getMessage(),'organizations'=>$organizations));
+				return $this->load_view('signupForm', array(
+					'message'=>$e->getMessage(),
+					'organizations'=>$organizations));
+			
+			}
+		
+		catch(OrganizationInvalidException $e)
+			{
+				return $this->load_view('signupForm', array(
+					'message'=>$e->getMessage(),
+					'organizations'=>$organizations));
 			
 			}
 		catch(SexInvalidException $e)
 			{
-				return $this->load->view('signupForm', array('message'=>$e->getMessage(),'organizations'=>$organizations));
+				return $this->load_view('signupForm', array(
+					'message'=>$e->getMessage(),
+					'organizations'=>$organizations));
 			
 			}
 			
 		catch(UserNameInvalidException $e)
 			{
-				return $this->load->view('signupForm', array('message'=>$e->getMessage(),'organizations'=>$organizations));
+				return $this->load_view('signupForm', array(
+					'message'=>$e->getMessage(),
+					'organizations'=>$organizations));
 			}
 
 		catch(PasswordInvalidException $e)
 			{
-				return $this->load->view('signupForm', array('message'=>$e->getMessage(),'organizations'=>$organizations));
+				return $this->load_view('signupForm', array(
+					'message'=>$e->getMessage(),
+					'organizations'=>$organizations));
 			}
+		catch(InvalidOrganizationException $e)
+			{
+				return $this->load_view('signupForm', array(
+					'message'=>$e->getMessage(),
+					'organizations'=>$organizations));
+			}
+		
 
 	}
 }

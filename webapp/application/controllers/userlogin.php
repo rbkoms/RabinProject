@@ -1,6 +1,5 @@
 <?php
-session_start();
-class Userlogin extends CI_Controller {
+class Userlogin extends NonSessionController {
 
 	public function __construct() {
 
@@ -9,11 +8,8 @@ class Userlogin extends CI_Controller {
 
 	public function index() {
 
-        if($this->session->userdata('member_id'))
-        {
-            $this->session->set_flashdata('error','PLease logout to signup');
-            redirect('dashboard');
-        }
+        $this->check_session();
+        
 
         if($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
@@ -21,42 +17,41 @@ class Userlogin extends CI_Controller {
             
             }
         
-		$data['username'] = $this->input->post("username");
-		$data['password'] = $this->input->post("password");
+		  $data['username'] = $_POST['username'];
+		  $data['password'] = $_POST['password'];
 	 
-	 try
-    {
-        $user = User::login($data);
+	     try
+        {
+            $user = User::login($data);
+            //$user->member->check_is_valid();
+          
+        }
+    
+         catch(UserInvalidException $e)
+            {
+              return $this->load_view('userloginform', array(
 
-        //redirect('dashboard/index/'.$user->member->id);
-    
-    }
-    
-    catch(UserInvalidException $e)
-    {
-        return $this->load->view('userloginform', array(
+         	'message' => $e->getMessage(),
+
+            	));  	
+         }
+
+            catch(UserPasswordInvalidException $e)
+         {
+                return $this->load_view('userloginform', array(
 
         	'message' => $e->getMessage(),
 
-        	));  	
-    }
-
-    catch(UserPasswordInvalidException $e)
-    {
-        return $this->load->view('userloginform', array(
-
-        	'message' => $e->getMessage(),
-
-       	)); 
+    	)); 
     }
     //echo $user->member->id;
 
-    $this->session->set_userdata(array(
-        'member_id'=>$user->member->id,
-    ));
-    $this->session->set_flashdata('in','you are in dude');
+         $this->session->set_userdata(array(
+         'member_id'=>$user->member->id,
+        ));
+     $this->session->set_flashdata('in','you are in!!!');
 
-    redirect('dashboard');
+     redirect('dashboard');
 
 }
 

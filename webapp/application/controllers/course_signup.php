@@ -31,8 +31,7 @@ class Course_Signup extends CI_Controller {
 
 			$course = Course::create($data);
 
-			
-		}
+			}
 			
 		catch(CNameInvalidException $e)
 			{
@@ -58,18 +57,17 @@ class Course_Signup extends CI_Controller {
 
         $courses= Course::all();
 
-        return $this->load->view('course',array('courses'=>$courses));
+        return $this->load->view('coursee',array('courses'=>$courses));
         }
 
 
-        public function view_members($course_id)
-        {   
-        //$members= Member::find('all',array('conditions'=>array('organization_id = ?',$organization_id)));
+        public function view_members($course_id) {   
+       
             $course= Course::find_by_id($course_id);
         
-            foreach ($course->members as $member)
+            foreach ($course->enrollments as $enrollment)
             {
-                echo $member->first_name." ".$member->last_name;
+                echo $enrollment->member->first_name." ".$enrollment->member->last_name;
             }
 
 	}

@@ -45,7 +45,9 @@
 | the active record class
 */
 
-$active_group = 'local';
+//$active_group = 'local';
+/*$active_group = 'testing';*/
+$active_group = ENVIRONMENT;
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
@@ -64,6 +66,7 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+
 $db['local']['hostname'] = 'localhost';
 $db['local']['username'] = 'root';
 $db['local']['password'] = 'root';
@@ -80,6 +83,8 @@ $db['local']['swap_pre'] = '';
 $db['local']['autoinit'] = TRUE;
 $db['local']['stricton'] = FALSE;
 
+$db['testing'] = $db['local'];
+$db['testing']['database'] = 'rabin_test';
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

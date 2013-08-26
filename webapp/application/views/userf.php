@@ -34,7 +34,12 @@ echo "Organization:\n";
 echo $member->organization->org_name;
 
 ?></pre>
-<a href='/userlogin/logout'>logout</a><br>
-<a href='/dashboard/add_course'>add_course</a>
+
+<a href='/userlogin/logout'>logout..</a><br>
+some features:<br>
+<a href='/dashboard/add'>Add Courses</a><br>
+<a href='/dashboard/deactivate'>Deactivate Courses</a><br>
+<a href='/dashboard/activate'>Activate Courses</a><br>
+<a href='/dashboard/delete_course'>UnEnroll Courses</a>
 </body>
 </html>

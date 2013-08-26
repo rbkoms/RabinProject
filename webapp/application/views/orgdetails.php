@@ -36,6 +36,8 @@
 				</tr>
 				<?php } ?>				
 			</table>
+			<?php echo $organization->org_name;?><br>
+			<a href="<?php echo "/subscribecourse/add_org_enrollment/$organization->id";?>">Subscribe Courses For The Very Organization</a>
 			   
 		</p>
 		
