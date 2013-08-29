@@ -3,6 +3,18 @@ include_once('Exceptions.php');
 class BaseModel extends ActiveRecord\Model {
 
 
+	public function set_is_active($bool) {
+		
+		$this->assign_attribute('is_active',$bool);
+
+	}
+	public function set_is_delete($bool) {
+		
+		$this->assign_attribute('is_delete',$bool);
+
+	}
+
+
 	public function activate() {
 
 		$this->check_is_delete();

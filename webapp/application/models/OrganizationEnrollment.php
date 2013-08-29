@@ -8,22 +8,31 @@ class OrganizationEnrollment extends BaseModel
 
     static $belongs_to = array(
         array(
-            'organizations',
+            'organization',
             'class_name'=>'Organization',
             'foreign_key'=>'organization_id'),
         array(
-            'courses',
+            'course',
             'class_name'=>'Course',
             'foreign_key'=>'course_id')
     );
 
-    public function set_course($course)
-    {       
+    public function set_course($course) { 
+
+        if(!($course instanceof Course)) {
+
+            throw new CourseBlankException("course required");
+        }    
+
+        $course->check_is_valid();
+
         $this->assign_attribute('course_id',$course->id);
     }
 
-    public function set_organization($organization)
-    {
+    public function set_organization($organization) {
+
+        $organization->check_is_valid();  
+        
         $this->assign_attribute('organization_id',$organization->id);
     }
     
@@ -31,11 +40,11 @@ class OrganizationEnrollment extends BaseModel
     public static function create($data)
     {
         $enrollment = new OrganizationEnrollment();
-        $enrollment->course = $data['course'];
+        $enrollment->course = $data['courses'];
         $enrollment->organization= $data['organization']; 
 
         self::get($data);
-
+        
         $enrollment->is_active=1;
         $enrollment->is_delete=0;
         $enrollment->save();
@@ -52,7 +61,7 @@ class OrganizationEnrollment extends BaseModel
     public static function  get($data)
     {
         $organization_id=$data['organization']->id;
-        $course_id= $data['course']->id;
+        $course_id= $data['courses']->id;
         $result= self::find(array('conditions'=> array('course_id=? AND organization_id=?',$course_id,$organization_id)));
         
         if($result && $result->is_active==TRUE)

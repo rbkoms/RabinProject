@@ -57,8 +57,8 @@ class Course_Signup extends CI_Controller {
 
         $courses= Course::all();
 
-        return $this->load->view('coursee',array('courses'=>$courses));
-        }
+        return $this->load->view('coursee',array('courses'=>$courses));/**/        
+    }
 
 
         public function view_members($course_id) {   

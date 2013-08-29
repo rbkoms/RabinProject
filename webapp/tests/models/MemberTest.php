@@ -122,9 +122,11 @@ class MemberTest extends CIUnit_TestCase {
 	public function test_set_organization()
 	{
 		$member= new Member();
-		$organization = $this->create_organization();
+		$organization_id = $this->organizations_fixt['2']['id'];
+		$organization = Organization::find_by_id($organization_id);
+		
 		$member->organization = $organization;
-		$this->assertEquals($member->org_id,$organization->id);
+		
 	}
 	
 	public function test_valid_organization() {
@@ -145,17 +147,27 @@ class MemberTest extends CIUnit_TestCase {
 		$member->organization= $member;
 	}
 	
-	public function test_set_inactive_exception() {
+	public function test_set_inactive_orgexception() {
 		
 		$member = new Member();
 		
-		$organization = $this->create_organization();
-		
-		$organization->is_active = FALSE;
-		
-		$organization->save();
+		$organization_id = $this->organizations_fixt['1']['id'];
 
+		$organization = Organization::find_by_id($organization_id);
+				
 		$this->setExpectedException('InactiveException');
+
+		$member->organization = $organization;
+	}
+	public function test_set_deleted_exception() {
+		
+		$member = new Member();
+		
+		$organization_id= $this->organizations_fixt['3']['id'];
+
+		$organization = Organization::find_by_id($organization_id);
+
+		$this->setExpectedException('DeleteException');
 
 		$member->organization = $organization;
 	}
@@ -163,9 +175,10 @@ class MemberTest extends CIUnit_TestCase {
 	public function test_create_member() {
 		
 		//$organization = $this->create_organization();
-		$organization = $this->organization_fixt['1'];
-		
-		$member = Member::create(array(
+		$organization_id = $this->organizations_fixt['1']['id'];
+		$organization = Organization::find_by_id($organization_id);
+		}
+		/*$member = Member::create(array(
 			'first_name'=> 'a',
 			'last_name'=>'b',
 			'email'=>'c',
@@ -175,15 +188,14 @@ class MemberTest extends CIUnit_TestCase {
         	'is_delete'=>FALSE,
 		));		
 		$member->save();
-		exit();
-		
+				
 		$this->assertEquals($member->first_name,'a');
 		$this->assertEquals($member->last_name,'b');
 		$this->assertEquals($member->email,'c');
 		$this->assertEquals($member->sex,'Male');
 		$this->assertEquals($member->org_id,$organization->id);
 		$this->assertEquals($member->is_active,TRUE);
-		$this->assertEquals($member->is_delete,FALSE);
-	}
+		$this->assertEquals($member->is_delete,FALSE);*/
+	
 }
 

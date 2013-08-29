@@ -33,7 +33,7 @@ class Dashboard extends SessionController {
                 foreach($_POST['check_list'] as $post)
                 {
                      $data['courses']=Course::find_by_id($post);
-                    $data['member']=$this->member;
+                    $data['members']=$this->member;
                     $data['organization']= $this->member->organization->id;
                     $check = OrganizationEnrollment::find_valid_by_organization_id_and_course_id($data['organization'],$post);
 

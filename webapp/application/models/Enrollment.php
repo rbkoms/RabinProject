@@ -7,11 +7,11 @@ class Enrollment extends BaseModel
     
     static $belongs_to = array(
         array(
-            'members',
+            'member',
             'class_name'=>'Member',
             'foreign_key'=>'member_id'),
         array(
-            'courses',
+            'course',
             'class_name'=>'Course',
             'foreign_key'=>'course_id')
             
@@ -24,6 +24,7 @@ class Enrollment extends BaseModel
         throw new CourseBlankException("course required");
             
         }
+        $course->check_is_valid();
         $this->assign_attribute('course_id',$course->id);
         }
         
@@ -35,11 +36,12 @@ class Enrollment extends BaseModel
         
     public static function create($data) {
     	$enrollment = new Enrollment();
-    	$enrollment->course = $data['course'];
-        $enrollment->member = $data['member'];
+    	$enrollment->course = $data['courses'];
+        $enrollment->member = $data['members'];
         if(!self::get($data)) {
             throw new InvalidEnrollmentException("cannot Select Enrollment");
         }
+        /*self::get($data);*/
         $enrollment->is_active=TRUE;
         $enrollment->is_delete=FALSE;
         $enrollment->save();
@@ -50,12 +52,12 @@ class Enrollment extends BaseModel
 
     public static function get($data) {
 
-        $member_id= $data['member']->id;
-        $course_id= $data['course']->id;
+        $member_id= $data['members']->id;
+        $course_id= $data['courses']->id;
         $result= self::find_by_course_id_and_member_id($course_id,$member_id);
 
         
-        if($result && !$result->is_delete && $result->is_active)
+        if($result && !$result->is_delete)
             {
             
             return false;

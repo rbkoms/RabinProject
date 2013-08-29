@@ -46,7 +46,7 @@
 */
 
 //$active_group = 'local';
-/*$active_group = 'testing';*/
+//$active_group = 'testing';
 $active_group = ENVIRONMENT;
 $active_record = TRUE;
 

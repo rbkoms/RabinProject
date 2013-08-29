@@ -26,6 +26,31 @@ class Organization extends BaseModel {
 	static $table_name = 'organizations';
 	static $primary_key = 'id';
 
+
+	private function count_members() {
+
+		$count = count($this->members);
+		return $count;
+
+	}
+
+	private function count_organization_enrollments() {
+
+		$count = count($this->organization_enrollments);
+		return $count;
+
+	}
+	public function count_members_org_enrollments() {
+
+		$count_members = $this->count_members();
+		$count_organization_enrollments = $this->count_organization_enrollments();
+		$this->assign_attribute('count_members',$count_members);
+		$this->assign_attribute('count_organization_enrollments',$count_organization_enrollments);
+		$this->save();
+		
+	}
+
+
 	public function set_org_name($org_name) {
 		
 		if($org_name=='') 
@@ -79,13 +104,47 @@ class Organization extends BaseModel {
 		$organization->org_location = $parameters['org_location'];
 		$organization->org_director = $parameters['org_director'];
 		$organization->org_contact_no = $parameters['org_contact_no'];
-		$organization->is_active=TRUE;
-        $organization->is_delete=FALSE;
+		$organization->is_active = TRUE;
+        $organization->is_delete = FALSE;
 		$organization->save();
 		
 
 		
 		return $organization;	
 	}
+	public function enroll_members($course) {
+
+		$connection = Enrollment::connection();
+		
+		try{
+			$connection->transaction();
+
+			$members = $this->members;
+
+			foreach($members as $member) {
+
+			$enrollment = Enrollment::find_by_member_id_and_course_id_and_is_active($member->id,$course->id,TRUE);
+				if($enrollment) {
+					$enrollment->is_delete=TRUE;
+				}
+
+			$newenrollment = Enrollment::create(array(
+				'members' => $member, 
+				'courses' => $course,
+				));
+		}
+
+			$connection->commit();
+
+
+		} 
+			catch(Exception $e) {
+
+			$connection->rollback();
+			throw $e;
+
+		}
+		
+	}
+
 }
-?>
