@@ -40,6 +40,14 @@
 
 $route['default_controller'] = "userlogin";
 $route['404_override'] = '';
+$route['subscribecourse/for_your_organization/organization/(:num)'] = 'subscribecourse/add_org_enrollment/$1';
+$route['viewmembers/(:num)'] = '/org_signup/viewmembers/$1';
+$route['add_courses'] = '/dashboard/add';
+$route['deactivate_courses'] = '/dashboard/deactivate';
+$route['activate_courses'] = '/dashboard/activate';
+$route['detele_courses']='/dashboard/delete_course';
+$route['logout'] ='/userlogin/logout';
+
 
 
 /* End of file routes.php */

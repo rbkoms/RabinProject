@@ -37,9 +37,9 @@ echo $member->organization->org_name;
 
 <a href='/userlogin/logout'>logout..</a><br>
 some features:<br>
-<a href='/dashboard/add'>Add Courses</a><br>
-<a href='/dashboard/deactivate'>Deactivate Courses</a><br>
-<a href='/dashboard/activate'>Activate Courses</a><br>
-<a href='/dashboard/delete_course'>UnEnroll Courses</a>
+<a href='add_courses'>Add Courses</a><br>
+<a href='deactivate_courses'>Deactivate Courses</a><br>
+<a href='activate_courses'>Activate Courses</a><br>
+<a href='detele_courses'>UnEnroll Courses</a>
 </body>
 </html>

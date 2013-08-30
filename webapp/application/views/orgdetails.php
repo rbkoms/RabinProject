@@ -32,12 +32,12 @@
 					<td width="300"><?php echo $organization->org_name;?></td>
 					<td width="300"><?php echo $organization->org_location;?></td>
 					<td width="200"><?php echo $organization->org_contact_no;?></td>
-					<td width="100"><?php echo "<a href='/org_signup/viewmembers/$organization->id'>view members</a>";?></a></td>
+					<td width="100"><?php echo "<a href='viewmembers/$organization->id'>view members</a>";?></a></td>
 				</tr>
 				<?php } ?>				
 			</table>
 			<?php echo $organization->org_name;?><br>
-			<a href="<?php echo "/subscribecourse/add_org_enrollment/$organization->id";?>">Subscribe Courses For The Very Organization</a>
+			<a href="<?php echo "/subscribecourse/for_your_organization/organization/$organization->id";?>">Subscribe Courses For The Very Organization</a>
 			   
 		</p>
 		

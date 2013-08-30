@@ -32,6 +32,7 @@ class Signup extends NonSessionController {
 
 			$member = Member::create($data);
 			$user = User::create($data);
+
 				
 		}
 			
@@ -90,6 +91,10 @@ class Signup extends NonSessionController {
 					'message'=>$e->getMessage(),
 					'organizations'=>$organizations));
 			}
+			
+			/*$this->check_session();
+     		redirect('dashboard');*/
+
 		
 
 	}

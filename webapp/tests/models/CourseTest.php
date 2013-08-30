@@ -1,7 +1,6 @@
 <?php
 class CourseTest extends CIUnit_TestCase {
-	protected $table=array(
-
+	protected $tables = array(
 		'courses'=>'courses',
 		'organizations'=>'organizations',
 		'organization_enrollments'=>'organization_enrollments',
@@ -132,16 +131,16 @@ class CourseTest extends CIUnit_TestCase {
 	public function create_mock_upload_false() {
 		
 		$config = $this->get_config_array();
-		$ftp_mock = $this->getMockBluider('CI_FTP')
-							->disableOrginalConstructor()
+		$ftp_mock = $this->getMockBuilder('CI_FTP')
+							->disableOriginalConstructor()
 							->getMock();
 
-		$ftp_mock->exsperts($this->once())
+		$ftp_mock->expects($this->any())
 							->method('connect')
 							->with($this->equalTo($config))
 							->will($this->returnValue(TRUE));
 
-		$ftp_mock->expects($this->once())
+		$ftp_mock->expects($this->any())
 							->method('upload')
 							->with('C:\Users\rabin\Documents\GitHub\RabinProject\webapp\system\Cupload\a.text','/www/uploads/myfolder/')
 							->will($this->returnValue(FALSE));
@@ -173,8 +172,8 @@ class CourseTest extends CIUnit_TestCase {
 	
 	public function test_upload_true() {
 		$config = $this->get_config_array();	
-		//$course_id = $this->courses_fixt['1']['id'];
-		$course = Course::find_by_id(1);
+		$course_id = $this->courses_fixt[1]['id'];
+		$course = Course::find_by_id($course_id);
 		$ftp_mock = $this->create_mock_upload_true();
     	$bool= $course->course_upload($ftp_mock,$config);
 		$this->assertTrue($bool);
@@ -182,8 +181,8 @@ class CourseTest extends CIUnit_TestCase {
 
 	public function test_upload_false() {
 		$config = $this->get_config_array();
-		//$course_id = $this->courses_fixt['1']['id'];
-		$course = Course::find_by_id(1);
+		$course_id = $this->courses_fixt[1]['id'];
+		$course = Course::find_by_id($course_id);
 		$ftp_mock = $this->create_mock_upload_false();
 		$bool = $course->course_upload($ftp_mock,$config);
 		$this->assertFalse($bool);
@@ -191,8 +190,8 @@ class CourseTest extends CIUnit_TestCase {
 	
 	public function test_connect_false() {
 		$config = $this->get_config_array();
-		//$course_id = $this->courses_fixt['1']['id'];
-		$course = Course::find_by_id(1);
+		$course_id = $this->courses_fixt[1]['id'];
+		$course = Course::find_by_id($course_id);
 		$ftp_mock = $this->create_mock_connect_false();
     	$bool= $course->course_upload($ftp_mock,$config);
 		$this->assertFalse($bool);

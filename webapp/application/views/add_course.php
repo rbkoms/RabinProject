@@ -41,7 +41,7 @@ echo $member->organization->org_name;
 
 	<input type="submit" value="submit">
 </form>
-<a href='/userlogin/logout'><h2>logout..</h2></a>
+<a href='logout'><h2>logout..</h2></a>
 <!-- <a href='/userlogin/logout'>logout</a>
 <a href='/dashboard/add_course'>add_course</a>
  --></body>

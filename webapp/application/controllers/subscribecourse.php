@@ -54,26 +54,27 @@
                     
                     }
                     }
-            catch (Exception $e)
-            {
+        
+        catch (Exception $e) {
+
                 echo "transaction unsuccessful";
             }
 
-        catch(InvalidOrgEnrollmentException $e)
-               {
+        catch(InvalidOrgEnrollmentException $e) {
+
             $organization=Organization::find_by_id($organization_id);
             $courses= Course::all();
             return $this->load->view('subscribe_course',array("message"=>$e->getMessage(),"organization"=>$organization,"courses"=>$courses));
            }
            
-        catch(BlankException $e)
-               {
+        catch(BlankException $e) {
+
             $organization=Organization::find_by_id($organization_id);
             $courses= Course::all();
             return $this->load->view('subscribe_course',array("message"=>$e->getMessage(),"organization"=>$organization,"courses"=>$courses));
            }
-        catch(CourseEnrolled $e)
-             {
+        catch(CourseEnrolled $e) {
+
             $courses= Course::all();
             $organization=Organization::find_by_id($organization_id);
             return $this->load->view('subscribe_course',array("message"=>$e->getMessage(),"organization"=>$organization,"courses"=>$courses));

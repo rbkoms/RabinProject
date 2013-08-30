@@ -76,12 +76,7 @@ class OrganizationTest extends CIUnit_TestCase
 		$this->assertEquals($organization->org_contact_no,989262626);
 		
 		}
-		/*public function test_enroll_members()
-	{
-		$course_id = $this->courses_fixt['2']['id'];
-		$course = Course::find_by_id($course_id);
 		
-	}*/
 	public function test_count_members_org_enrollments() {
 
 		$organization_id = $this->organizations_fixt['2']['id'];
