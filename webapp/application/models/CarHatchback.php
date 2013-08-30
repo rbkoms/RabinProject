@@ -23,13 +23,13 @@ class CarHatchback extends Car {
 		
 			$this->car_length = $car_length;
 	}
-	public static function create ($parameters) {
+	public static function create_hatchback ($parameters) {
 
-		$hatchback = new Hatchback();
+		$hatchback = static::create();
 		$hatchback->model_name = $parameters['model_name'];
 		$hatchback->car_length = $parameters['car_length'];
 		$hatchback->car_mileage = $parameters['car_mileage'];
-		$hatchback->save();
+		
 		return $hatchback;
 	}
 

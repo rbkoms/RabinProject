@@ -23,15 +23,20 @@ class CarSedan extends Car {
 		$this->car_mileage = $car_mileage;
 		
 	}
+	public function set_wheels($wheels) {
+
+		$wheels;
+	}
 
 
-	public static function create ($parameters) {
+	public static function create_sedan ($parameters) {
 
-		$sedan = new Sedan();
+		$sedan = static::create();
 		$sedan->model_name = $parameters['model_name'];
 		$sedan->car_length = $parameters['car_length'];
 		$sedan->car_mileage = $parameters['car_mileage'];
-		$sedan->save();
+		
+		return $sedan;
 	}
 
 }
