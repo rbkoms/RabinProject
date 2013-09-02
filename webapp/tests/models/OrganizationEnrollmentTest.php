@@ -50,7 +50,7 @@ class OrganizationEnrollmentTest extends CIUnit_TestCase
 
 	}
 */
-	private function create_course() {
+	/*private function create_course() {
 		
 		$course = Course::create(array(
 							'cname'=>'java',
@@ -60,7 +60,7 @@ class OrganizationEnrollmentTest extends CIUnit_TestCase
 						);
 		$course->save();
 		return $course;
-	}
+	}*/
 	public function test_set_course() {
 		
 		$org_enrollment = new OrganizationEnrollment();
@@ -118,9 +118,9 @@ class OrganizationEnrollmentTest extends CIUnit_TestCase
 		$this->assertEquals($org_enrollment->is_active,TRUE);
 		$this->assertEquals($org_enrollment->is_delete,FALSE);
 	}
+	
 	public function test_create_exception() {
 		
-		//$course = $this->create_course();
 		$course_id = $this->courses_fixt['1']['id'];
 		$course = Course::find_by_id($course_id);
 
@@ -129,14 +129,6 @@ class OrganizationEnrollmentTest extends CIUnit_TestCase
 		$organization = Organization::find_by_id($organization_id);
 		
 		
-		/*$org_enrollment = OrganizationEnrollment::create(array(
-		 			'course'=>$course,
-		 			'organization'=>$organization,
-		 			));
-		$org_enrollment->is_active =TRUE;
-		$org_enrollment->is_delete =FALSE;
-		$org_enrollment->save();*/
-
 		$this->setExpectedException("CourseEnrolled");
 		$org_enrollment = OrganizationEnrollment::create(array(
 		 			'courses'=>$course,
@@ -144,6 +136,7 @@ class OrganizationEnrollmentTest extends CIUnit_TestCase
 		 				));
 				
 	}
+
 	public function test_create_inactive_exception() {
 		$course_id = $this->courses_fixt['1']['id'];
 		$course = Course::find_by_id($course_id);

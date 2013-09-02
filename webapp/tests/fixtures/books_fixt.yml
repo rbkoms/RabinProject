@@ -1,0 +1,16 @@
+1:
+	book_name:'Nepali'
+	id:1
+	book_author:'HDK'
+	book_edition:1
+
+2:
+	book_name:'HONESTY'
+	id:2
+	book_author:'MICK'
+	book_edition:'1.0'
+3:
+	book_name:'HONESTYuuuuuuu'
+	id:3
+	book_author:'MICKuu'
+	book_edition:1

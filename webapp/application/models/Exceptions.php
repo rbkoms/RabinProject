@@ -26,6 +26,21 @@ class InvalidOrganizationException extends Exception{ }
 class InvalidEnrollmentException extends Exception { }
 class OrgLocationInvalidException extends Exception { }
 class InvalidOrgEnrollmentException extends Exception { }
-//class Exception extends Exception { }
+class BookNameInvalidException extends Exception { }
+class BookAuthorInvalidException extends Exception { }
+class BookEditionInvalidException extends Exception { }
+class BookBlankException extends Exception { }
+class QuantityInvalidException extends Exception { }
+class OrganizationBookExits extends Exception { }
+class IssuedMembersException extends Exception { }
+class ReturnMembersException extends Exception { }
+class BookAlreadyExitException extends Exception { }
+class BooksUnavailableException extends Exception { }
+class InvalidInstanceException extends Exception { }
+class InvalidModelException extends Exception { }
+
+
+
+
 
 ?>

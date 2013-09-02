@@ -1,0 +1,24 @@
+1:
+	id:1
+	book_id:1
+	organization_id:2
+	quantity:10
+	available_quantity:6
+	used_quantity:4
+2:
+	id:2
+	book_id:2
+	organization_id:2
+	quantity:10
+	available_quantity:0
+	used_quantity:10
+3:
+	id:3
+	book_id:3
+	organization_id:2
+	quantity:10
+	available_quantity:10
+	used_quantity:0
+
+
+
