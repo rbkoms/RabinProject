@@ -33,3 +33,19 @@
 	org_contact_no:97798556549855
 	is_active:1
 	is_delete:0
+5:
+	id:5
+	org_name:HCL Mediaaaafafafaf
+	org_location:Nepal
+	org_director:Hcl Nepal
+	org_contact_no:97798556549855
+	is_active:1
+	is_delete:0
+6:
+	id:6
+	org_name:verona
+	org_location:Nepal
+	org_director:Hcl Nepal
+	org_contact_no:97798556549855
+	is_active:1
+	is_delete:0

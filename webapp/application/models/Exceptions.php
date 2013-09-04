@@ -38,6 +38,7 @@ class BookAlreadyExitException extends Exception { }
 class BooksUnavailableException extends Exception { }
 class InvalidInstanceException extends Exception { }
 class InvalidModelException extends Exception { }
+class MemberBooksAlreadyExistsException extends Exception { }
 
 
 

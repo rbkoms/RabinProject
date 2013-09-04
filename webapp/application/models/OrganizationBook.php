@@ -103,7 +103,7 @@ class OrganizationBook extends BaseModel {
     
 
     public static function create($data) {
-        s
+        
         $organization_book = new OrganizationBook();
         $organization_book->book = $data['books'];
         $organization_book->organization= $data['organization'];

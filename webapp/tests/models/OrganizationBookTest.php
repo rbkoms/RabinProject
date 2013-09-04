@@ -1,5 +1,5 @@
- <?php
-class OrganizationBookTest extends CIUnit_TestCase
+<?php
+class OrganizationBookkTest extends CIUnit_TestCase
 {
 	protected $tables = array(
 		'organization_books'=>'organization_books',
@@ -76,8 +76,8 @@ class OrganizationBookTest extends CIUnit_TestCase
 		
 		$organization_book->organization = $organization;
 
-	}*/
-
+	}
+*/
 	public function test_set_organization_blank_Exception() {
 		
 		$organization_book = new OrganizationBook();

@@ -19,6 +19,40 @@
 	quantity:10
 	available_quantity:10
 	used_quantity:0
-
+4:
+	id:4
+	book_id:2
+	organization_id:1
+	quantity:10
+	available_quantity:0
+	used_quantity:10
+5:
+	id:5
+	book_id:3
+	organization_id:1
+	quantity:10
+	available_quantity:5
+	used_quantity:5
+6:
+	id:6
+	book_id:4
+	organization_id:4
+	quantity:10
+	available_quantity:4
+	used_quantity:6
+7:
+	id:7
+	book_id:4
+	organization_id:2
+	quantity:10
+	available_quantity:4
+	used_quantity:6
+8:
+	id:8
+	book_id:5
+	organization_id:6
+	quantity:10
+	available_quantity:0
+	used_quantity:10
 
 
