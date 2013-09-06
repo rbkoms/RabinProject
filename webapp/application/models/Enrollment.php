@@ -24,7 +24,7 @@ class Enrollment extends BaseModel
         throw new CourseBlankException("course required");
             
         }
-        $course->check_is_valid();
+        //$course->check_is_valid();
         $this->assign_attribute('course_id',$course->id);
         }
         

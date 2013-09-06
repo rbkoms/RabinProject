@@ -95,21 +95,23 @@ class CourseTest extends CIUnit_TestCase {
 		$this->assertEquals($course->duration,1);
 	}
 
-	public function get_config_array() {
-		$config['hostname'] = 'google.com';
-        $config['username'] = 'a';
-        $config['password'] = 'a';
-        $config['port']     = 21;
-        $config['passive']  = FALSE;
-        $config['debug']    = TRUE;
+	public function test_get_config_array() {
 
-        return $config;
+		$course = new Course();
+		$config = $course->get_config_array();
+
+        $this->assertEquals($config['username'], 'a');
+        $this->assertEquals($config['hostname'], 'google.com');
+        $this->assertEquals($config['password'], 'a');
+        $this->assertEquals($config['port'], 21);
+        $this->assertEquals($config['passive'], FALSE);
+        $this->assertEquals($config['debug'], TRUE);
 	}
 
 
 	public function create_mock_upload_true() {
 		
-		$config = $this->get_config_array();
+		$config = $this->test_get_config_array();
 		$ftp_mock = $this->getMockBuilder('CI_FTP')
 							->disableOriginalConstructor()
 							->getMock();
@@ -130,7 +132,7 @@ class CourseTest extends CIUnit_TestCase {
 
 	public function create_mock_upload_false() {
 		
-		$config = $this->get_config_array();
+		$config = $this->test_get_config_array();
 		$ftp_mock = $this->getMockBuilder('CI_FTP')
 							->disableOriginalConstructor()
 							->getMock();
@@ -150,7 +152,7 @@ class CourseTest extends CIUnit_TestCase {
 	
 	public function create_mock_connect_false()
 	{
-		$config = $this->get_config_array();
+		$config = $this->test_get_config_array();
 		$ftp_mock = $this->getMockBuilder('CI_FTP')
 							->disableOriginalConstructor()
 							->getMock();
@@ -171,7 +173,7 @@ class CourseTest extends CIUnit_TestCase {
 	}
 	
 	public function test_upload_true() {
-		$config = $this->get_config_array();	
+		$config = $this->test_get_config_array();	
 		$course_id = $this->courses_fixt[1]['id'];
 		$course = Course::find_by_id($course_id);
 		$ftp_mock = $this->create_mock_upload_true();
@@ -180,7 +182,7 @@ class CourseTest extends CIUnit_TestCase {
 	}
 
 	public function test_upload_false() {
-		$config = $this->get_config_array();
+		$config = $this->test_get_config_array();
 		$course_id = $this->courses_fixt[1]['id'];
 		$course = Course::find_by_id($course_id);
 		$ftp_mock = $this->create_mock_upload_false();
@@ -189,7 +191,7 @@ class CourseTest extends CIUnit_TestCase {
 	}
 	
 	public function test_connect_false() {
-		$config = $this->get_config_array();
+		$config = $this->test_get_config_array();
 		$course_id = $this->courses_fixt[1]['id'];
 		$course = Course::find_by_id($course_id);
 		$ftp_mock = $this->create_mock_connect_false();

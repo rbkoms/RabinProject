@@ -91,10 +91,10 @@ class Member extends BaseModel {
 		return $this->read_attribute('last_name');
 	}
 
-	public function get_full_name() {
+	/*public function get_full_name() {
 
 		return $this->read_attribute('first_name'). " " . $this->read_attribute('last_name');
-	}
+	}*/
 
 	public function get_email() {
 

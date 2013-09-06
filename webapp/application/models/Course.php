@@ -77,6 +77,7 @@ class Course extends BaseModel {
 		}
 
 	public function get_config_array() {
+		
 		$config['hostname'] = 'google.com';
         $config['username'] = 'a';
         $config['password'] = 'a';

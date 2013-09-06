@@ -99,7 +99,7 @@ class UserTest extends CIUnit_TestCase {
 		
 		$this->assertEquals($user->password,sha1('om'));
 	}
-	public function test_set_last_name_exception() {
+	public function test_set_password_exception() {
 
 		$user = new User();
 
@@ -108,31 +108,54 @@ class UserTest extends CIUnit_TestCase {
 		$user->password = '';
 	}
 
-	public function set_member($member) {
-		
-		$this->assign_attribute('member_id', $member->id);
-	}
+	public function test_set_member() {
 
-
-	public function test_create_user() {
-		
-		/*$member= $this->create_member();*/
-		$member_id=$this->members_fixt['3']['id'];
+		$member_id = $this->members_fixt['1']['id'];
 		$member = Member::find_by_id($member_id);
 
+		$user= new User();
+		$user->member = $member;
+		$this->assertEquals($user->member_id,$member->id);
+
+	}
+	public function test_create_user() {
+				
 		$user = User::create(array(
 			
 			'username'=>'rbk',
 			'password'=>'rbk',
 			
 			));
-		$user->member = $member;
+		/*$user->member = $member;*/
 		$user->save();
 				
 		$this->assertEquals($user->username,'rbk');
 		$this->assertEquals($user->password,sha1('rbk'));
 		//$this->assertEquals($user->member_id,$member->id);
 		
+	}
+	public function test_login() {
+
+		$user = User::login(array('username'=>'ram','password'=>'ram'));
+		$this->assertInstanceOf('user',$user);
+	}
+
+	public function test_login_username_exception() {
+
+		$this->setExpectedException("UserInvalidException");
+		$user = User::login(array('username'=>'aaa','password'=>'ram'));	
+	}
+
+	public function test_login_password_invalid_exception() {
+
+		$this->setExpectedException("UserPasswordInvalidException");
+		$user = User::login(array('username'=>'ram','password'=>'rbk'));	
+	}
+	public function test_username_exits_exception() {
+		
+		$user = new User();
+		$this->setExpectedException("UserNameInvalidException");
+		$user->username = 'ram';	
 	}
 }
 

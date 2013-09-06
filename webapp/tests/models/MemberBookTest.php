@@ -47,12 +47,12 @@ class MemberBookTest extends CIUnit_TestCase
 		$organization_book_id = $this->organization_books_fixt['4']['id'];
 		$organization_book = OrganizationBook::find_by_id($organization_book_id);
 
-		$member_id = $this->members_fixt['7']['id'];
-		$member = Member::find_by_id($member_id);
+		/*$member_id = $this->members_fixt['7']['id'];
+		$member = Member::find_by_id($member_id);*/
 		
 		$member_book = new MemberBook();
 		$member_book->organization_book = $organization_book;
-		$this->assertEquals($member_book->book_id,$organization_book->book_id);
+		$this->assertEquals($member_book->organization_book_id,$organization_book->id);
 	}
 	public function test_set_organization_book_exception() {
 
@@ -66,8 +66,8 @@ class MemberBookTest extends CIUnit_TestCase
 	}
 	public function test_set_organization_book_blank_exception() {
 
-		$member_id = $this->members_fixt['2']['id'];
-		$member = Member::find_by_id($member_id);
+		/*$member_id = $this->members_fixt['2']['id'];
+		$member = Member::find_by_id($member_id);*/
 		$member_book= new MemberBook();
 		$this->setExpectedException("InvalidInstanceException");
 		$member_book->organization_book = '';
@@ -89,7 +89,7 @@ class MemberBookTest extends CIUnit_TestCase
 
 		$organization_book->reload();
 		$this->assertEquals($member_book->member_id,$member->id);
-		$this->assertEquals($member_book->book_id,$organization_book->book_id);
+		$this->assertEquals($member_book->organization_book_id,$organization_book->id);
 		$this->assertEquals($organization_book->used_quantity,$used_quantity+1);
 		$this->assertEquals($organization_book->available_quantity,$available_quantity-1);
 	}
@@ -124,9 +124,9 @@ class MemberBookTest extends CIUnit_TestCase
 	}
 	public function test_return_book() {
 
-		$member_book_id= $this->member_books_fixt['4']['id'];
+		$member_book_id= $this->member_books_fixt['5']['id'];
 		$member_book= MemberBook::find_by_id($member_book_id);
-
+ 
 		$organization_book_id = $this->organization_books_fixt['7']['id'];
 		$organization_book = OrganizationBook::find_by_id($organization_book_id);
 

@@ -174,11 +174,11 @@ class MemberTest extends CIUnit_TestCase {
 
 	public function test_create_member() {
 		
-		//$organization = $this->create_organization();
-		$organization_id = $this->organizations_fixt['1']['id'];
-		$organization = Organization::find_by_id($organization_id);
-		}
-		/*$member = Member::create(array(
+		$organization = $this->create_organization();
+		/*$organization_id = $this->organizations_fixt['1']['id'];
+		$organization = Organization::find_by_id($organization_id);*/
+
+		$member = Member::create(array(
 			'first_name'=> 'a',
 			'last_name'=>'b',
 			'email'=>'c',
@@ -195,7 +195,7 @@ class MemberTest extends CIUnit_TestCase {
 		$this->assertEquals($member->sex,'Male');
 		$this->assertEquals($member->org_id,$organization->id);
 		$this->assertEquals($member->is_active,TRUE);
-		$this->assertEquals($member->is_delete,FALSE);*/
-	
+		$this->assertEquals($member->is_delete,FALSE);
+	}
 }
 

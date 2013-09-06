@@ -12,29 +12,12 @@
     static $table_name ='users';
     static $primary_key = 'id';
 
-	/*public function set_username($username) {
-
-        if($username=='') {
-            throw new UserNameInvalidException("username required");
-        } 
-
-        if()
-
-        if(User::exists(array(
-                'username' => $username,
-                )))
-            {
-                throw new UserNameInvalidException("username is there");
-            }
-
-           $this->assign_attribute('username', $username);
-	}
-*/
+	
     public function set_username($username)
     {
 
-        if ($username=='')
-        {
+        if ($username=='') {
+            
             throw new UserNameInvalidException("Username required");
         }
 
@@ -48,7 +31,7 @@
             
          if ($bool) {
             
-            throw new UserNameInvalidException("Username already exist");
+            throw new UserNameInvalidException("Username already exist...");
             
         }
         }
@@ -133,4 +116,5 @@
 	
 	   return $user;
    } 
+   
 }
