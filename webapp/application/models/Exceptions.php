@@ -39,7 +39,8 @@ class BooksUnavailableException extends Exception { }
 class InvalidInstanceException extends Exception { }
 class InvalidModelException extends Exception { }
 class MemberBooksAlreadyExistsException extends Exception { }
-
+class FeedbackInvalidException extends Exception { }
+class NameInvalidException extends Exception { }
 
 
 

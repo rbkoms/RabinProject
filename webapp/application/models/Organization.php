@@ -91,7 +91,7 @@ class Organization extends BaseModel {
  		$this->assign_attribute('org_contact_no', $org_contact_no);	
 	}
 
-	public function finder() {
+	public static function finder() {
 		$organizations = Organization::find('all');
 		return $organizations;
 	}

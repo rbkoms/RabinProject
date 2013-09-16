@@ -10,13 +10,7 @@
     <fliter>
     <whitelist processUncoveredFilesFromWhitelist="True">
         <directory suffix=".php">C:\Users\rabin\Documents\GitHub\RabinProject\webapp\application\models</directory>
-        <!-- <exclude>
-            <file>C:\Users\rabin\Documents\GitHub\RabinProject\webapp\application\models\CarSedan.php</file>
-            <file>C:\Users\rabin\Documents\GitHub\RabinProject\webapp\application\models\Car.php</file>
-            <file>C:\Users\rabin\Documents\GitHub\RabinProject\webapp\application\models\CarHatchBack.php</file>
-            <file>C:\Users\rabin\Documents\GitHub\RabinProject\webapp\application\models\BaseModel.php</file>
-            <file>C:\Users\rabin\Documents\GitHub\RabinProject\webapp\application\models\Exceptions .php</file>
-        </exclude> -->
+        
     
     </whitelist>
     </fliter>

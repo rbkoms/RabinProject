@@ -71,6 +71,8 @@ class Course extends BaseModel {
 		$course->cname = $parameters['cname'];
 		$course->catagory= $parameters['catagory'];
 		$course->duration = $parameters['duration'];
+		$course->is_active=TRUE;
+		$course->is_delete=FALSE;
 		$course->save();
 
 		return $course;

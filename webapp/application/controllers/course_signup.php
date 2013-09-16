@@ -65,10 +65,19 @@ class Course_Signup extends CI_Controller {
        
             $course= Course::find_by_id($course_id);
         
-            foreach ($course->enrollments as $enrollment)
+            /*foreach ($course->enrollments as $enrollment)
             {
                 echo $enrollment->member->first_name." ".$enrollment->member->last_name;
-            }
+            }*/
+            return $this->load->view('cmembers',array(
+            	'courses'=>$course));
+	
 
+	}
+	public function outcoursedetails() {
+
+		$courses= Course::all();
+
+       	$this->load->view('coursee',array('courses'=>$courses));/**/        
 	}
 }

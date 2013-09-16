@@ -45,9 +45,9 @@
 | the active record class
 */
 
-//$active_group = 'local';
+$active_group = 'local';
 //$active_group = 'testing';
-$active_group = ENVIRONMENT;
+//$active_group = ENVIRONMENT;
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';

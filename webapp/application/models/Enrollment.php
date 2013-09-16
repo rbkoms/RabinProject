@@ -71,5 +71,17 @@ class Enrollment extends BaseModel
        
        throw new CourseBlankException("Select the course first!!"); 
     }
+
+    /*public function deactivate_courses($member) {
+
+        $enrollment = self::find_all_by_member_id_is_active_and_is_delete(FALSE,FALSE);
+    }
+
+    public function activate_courses() {
+
+        $enrollment = self::find_all_by_is_active_and_is_delete(TRUE,FALSE);
+    }
+
+    pu*/
        
 }

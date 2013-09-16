@@ -9,13 +9,15 @@ class Userlogin extends NonSessionController {
 	public function index() {
 
         $this->check_session();
+
+        $organizations = Organization::find('all');
         
 
         if($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
-            return $this->load->view('userloginForm');
+            return $this->load->view('userloginForm', array('organizations' => $organizations));
             
-            }
+            } 
         
 		  $data['username'] = $_POST['username'];
 		  $data['password'] = $_POST['password'];
@@ -74,10 +76,30 @@ class Userlogin extends NonSessionController {
 
 }
 
-
+    
     public function logout() {
 
         $this->session->sess_destroy();
         redirect('../userlogin');
         }
+
+
+  public function about() {
+
+    $this->load_view('about');
+
+  }
+
+  public function contact() { 
+
+    $this->load_view('contact');
+
+  }
+  
+
+  public function page() { 
+
+    $this->load_view('page');
+  }
+
 }

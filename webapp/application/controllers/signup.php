@@ -10,7 +10,7 @@ class Signup extends NonSessionController {
 	public function index() {
 
 		$this->check_session();
-		$organizations = Organization::finder();
+		$organizations = Organization::find('all');
 
 		if($_SERVER['REQUEST_METHOD'] !== 'POST') {
 			/*$str= Member::echo_table_name();

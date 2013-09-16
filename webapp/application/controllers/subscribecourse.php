@@ -47,9 +47,9 @@
 
                         $data['organization']= Organization::find_by_id($organization_id);
                         $data['courses']=Course::find_by_id($post);
-                        $find_existence = OrganizationEnrollment::get($data);
+//                        $find_existence = OrganizationEnrollment::get($data);
                         $enrollment= OrganizationEnrollment::create($data);  
-                        $data['organization']->enroll_members($data['courses']);                
+                        //$data['organization']->enroll_members($data['courses']);                
                         
                     
                     }
